@@ -27,6 +27,10 @@
 </head>
 
 <body>
+  <!-- loading screen -->
+  <div id="loader"></div>
+
+  <!-- CubeX Landing Page -->
   <div id="main">
     <div id="root"></div>
     <div id="sidebar">
@@ -36,53 +40,90 @@
       <div id="manifesto">////// Manifesto</div>
     </div>
   </div>
-  <div id="three"></div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+  <!-- Vanta Neural Background -->
+  <div id="three">
+    <div id="three-canvas">
+      <h1>BrandCoin Just Entered the Real World.</h1>
+      <p id="typewriter"></p>
+    </div>
 
-  <script>
-    VANTA.NET({
-      el: "#three",
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: false,
-      minHeight: 600.00,
-      minWidth: 200.00,
-      scale: 1.00,
-      scaleMobile: 1.00,
-      backgroundColor: 0x151520,
-      points: 20.00,
-      maxDistance: 21.00,
-      spacing: 16.00
-    })
-  </script>
-</body>
+    <!-- COMING SOON PAGE -->
+    <div class="bg">
+      <div class="middle">
+        <h1>COMING SOON</h1>
+        <hr>
+        <p>Join the community Now!</p>
+      </div>
+      <div class="bottomleft">
+        <p>CubeX</p>
+      </div>
+      <div class="bottomright">
+        <p>All Rights Reserved</p>
+      </div>
+    </div>
 
-</html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
 
-
-
-
-
-
-
-
-
-<!-- <div id="main"></div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
-
-<script>
-    VANTA.WAVES({
-        el: "#main",
+    <script>
+      VANTA.NET({
+        el: "#three",
         mouseControls: true,
         touchControls: true,
         gyroControls: false,
-        minHeight: 200.00,
+        minHeight: 700.00,
         minWidth: 200.00,
         scale: 1.00,
-        scaleMobile: 1.00
+        scaleMobile: 1.00,
+        backgroundColor: 0x151520,
+        points: 20.00,
+        maxDistance: 21.00,
+        spacing: 16.00
       })
-</script> -->
+    </script>
+
+    <script>
+      document.onreadystatechange = function () {
+        if (document.readyState !== "complete") {
+          document.querySelector("body").style.visibility = "hidden";
+          document.getElementById("loader").style.visibility = "visible";
+        } else {
+          setTimeout(() => {
+            document.getElementById("loader").style.display = "none";
+            document.querySelector("body").style.visibility = "visible";
+          }, 2000)
+        }
+      };
+    </script>
+    <script>
+      const lines = [
+        "A cryptocurrency is a shape of virtual asset",
+        "primarily based totally on a community this is",
+        "disbursed throughout a big range of computers."
+      ];
+
+      let currentLine = 0;
+      let currentChar = 0;
+      const typewriterElement = document.getElementById("typewriter");
+
+      function typeLine() {
+        if (currentLine < lines.length) {
+          const line = lines[currentLine];
+          if (currentChar < line.length) {
+            typewriterElement.innerHTML += line[currentChar];
+            currentChar++;
+            setTimeout(typeLine, 70); // Adjust typing speed here
+          } else {
+            currentChar = 0;
+            currentLine++;
+            typewriterElement.innerHTML += "<br>"; // Add a line break after each line
+            setTimeout(typeLine, 500); // Pause before typing the next line
+          }
+        }
+      }
+      typeLine();
+    </script>
+</body>
+
+</html>
